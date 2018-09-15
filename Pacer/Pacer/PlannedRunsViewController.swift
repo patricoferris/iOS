@@ -99,7 +99,7 @@ class BlockCreator : UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         let hours = time.selectedRow(inComponent: 0)
         let minutes = time.selectedRow(inComponent: 1)
         let seconds = time.selectedRow(inComponent: 2)
-        trainingBlock.setGoalTime([Double(hours), Double(minutes), Double(seconds)])
+        trainingBlock.setGoalTime([(Double(hours) * 60) + Double(minutes), Double(seconds)])
     }
     
     @IBAction func dateChanged(_ sender: UIDatePicker) {
@@ -107,14 +107,14 @@ class BlockCreator : UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     }
     
     @IBAction func sliderChanged(_ sender: UISlider) {
-        distanceLabel.text = String(sender.value)
-        trainingBlock.setDistance(Double(sender.value))
+        let val = Double(Int((sender.value * 10))) / 10.0
+        distanceLabel.text = String(val)
+        trainingBlock.setDistance(val)
     }
     
     
     @IBAction func createBlock(_ sender: UIBarButtonItem) {
         delegate?.trainingBlock = trainingBlock
-        print(delegate?.trainingBlock)
         delegate?.addBlock()
         self.dismiss(animated: true, completion: nil)
     }

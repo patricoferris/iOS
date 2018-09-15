@@ -42,6 +42,15 @@ class PlannedRunsController: UITableViewController {
         return blocks.count
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+  
+            blocks.remove(at: indexPath.row)
+
+            table.reloadData()
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TrainingBlockCell
         let block = blocks[indexPath.row]
