@@ -19,6 +19,12 @@ class Pace {
         self.metric = metric
     }
     
+    init(distance: Double, minutes: Double, seconds: Double, metric: Bool) {
+        let totalSeconds = seconds + (60 * minutes)
+        self.metric = metric
+        self.seconds = totalSeconds / distance
+    }
+    
     func getMinutesAndSeconds(_ s: Double) -> [Int] {
         let minutes = s / 60.0
         let seconds = s.truncatingRemainder(dividingBy: 60.0)
