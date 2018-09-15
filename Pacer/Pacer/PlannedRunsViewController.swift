@@ -9,18 +9,20 @@
 import UIKit
 import Foundation
 
-class PlannedRunsViewController: UIViewController {
+class PlannedRunsViewController: UIViewController, BlockAdder {
     
+    var metric: Bool!
+    var trainingBlock: TrainingBlock!
     var tableViewController : PlannedRunsController!
     var blockController : BlockCreator!
     
     @IBOutlet weak var metricButton: UISegmentedControl!
     @IBOutlet weak var table: UIView!
     
-    var tableView : PlannedRunsController!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        trainingBlock = TrainingBlock(metric: metricButton.selectedSegmentIndex == 0 ? true : false)
+        metric = metricButton.selectedSegmentIndex == 0 ? true : false
     }
     
     override func didReceiveMemoryWarning() {
@@ -32,30 +34,36 @@ class PlannedRunsViewController: UIViewController {
         switch segue.destination {
         case let viewController1 as PlannedRunsController:
             self.tableViewController = viewController1
-        case let viewController2 as BlockCreator:
-            self.blockController = viewController2
         default:
             break
         }
         
-        self.blockController.metric = metricButton.selectedSegmentIndex == 0 ? true : false
-    }
-
-    @IBAction func addBlockPressed(_ sender: UIBarButtonItem) {
-        tableViewController.addBlock(TrainingBlock(metric: true, distance: 10.0, goalTime: [40.0, 0.0], type: TrainingType.Uptempo, date: Date(timeIntervalSinceNow: 0)))
+        if let addBlock = segue.destination as? BlockCreator {
+            addBlock.delegate = self
+        }
+        
     }
     
+    @IBAction func switchMetric(_ sender: UISegmentedControl) {
+        trainingBlock.setMetric(metricButton.selectedSegmentIndex == 0 ? true : false)
+        metric = metricButton.selectedSegmentIndex == 0 ? true : false
+    }
     
+    func addBlock() {
+        trainingBlock.setMetric(self.metric)
+        tableViewController.addBlock(trainingBlock)
+    }
 }
 
 class BlockCreator : UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var metric : Bool!
     var trainingBlock : TrainingBlock!
+    var delegate: BlockAdder!
     
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var distanceAndTime: UIPickerView!
     @IBOutlet weak var distanceSlider: UISlider!
+    @IBOutlet weak var time: UIPickerView!
     @IBOutlet weak var distanceLabel: UILabel!
     
     let pickerData = [
@@ -66,9 +74,9 @@ class BlockCreator : UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        distanceAndTime.dataSource = self
-        distanceAndTime.delegate = self
-        self.trainingBlock = TrainingBlock(metric: metric)
+        time.dataSource = self
+        time.delegate = self
+        self.trainingBlock = TrainingBlock(metric: true)
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -83,6 +91,17 @@ class BlockCreator : UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         return pickerData[component].count
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        setTime()
+    }
+    
+    func setTime() {
+        let hours = time.selectedRow(inComponent: 0)
+        let minutes = time.selectedRow(inComponent: 1)
+        let seconds = time.selectedRow(inComponent: 2)
+        trainingBlock.setGoalTime([Double(hours), Double(minutes), Double(seconds)])
+    }
+    
     @IBAction func dateChanged(_ sender: UIDatePicker) {
         trainingBlock.setDate(sender.date)
     }
@@ -92,9 +111,28 @@ class BlockCreator : UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         trainingBlock.setDistance(Double(sender.value))
     }
     
+    
+    @IBAction func createBlock(_ sender: UIBarButtonItem) {
+        delegate?.trainingBlock = trainingBlock
+        print(delegate?.trainingBlock)
+        delegate?.addBlock()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func close(_ sender: UIBarButtonItem) {
        self.dismiss(animated: true, completion: nil)
     }
+    
+}
+
+protocol BlockAdder {
+    
+    var metric : Bool! {get set}
+    var trainingBlock : TrainingBlock! {get set}
+    var tableViewController : PlannedRunsController! {get set}
+    
+    func addBlock()
+    
 }
 
 

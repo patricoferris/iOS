@@ -34,6 +34,7 @@ class PlannedRunsController: UITableViewController {
     
     func addBlock(_ block: TrainingBlock) {
         blocks.append(block)
+        print(blocks)
         table.reloadData()
     }
     

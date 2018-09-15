@@ -142,6 +142,7 @@
                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="changeMeasurement:" destination="BYZ-38-t0r" eventType="valueChanged" id="Lxd-k7-IpT"/>
+                                                <action selector="switchMetric:" destination="aan-bm-VZP" eventType="valueChanged" id="JhE-ie-10U"/>
                                             </connections>
                                         </segmentedControl>
                                     </barButtonItem>
@@ -177,7 +178,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="mIy-Gq-FxS"/>
                     <connections>
-                        <outlet property="metricButton" destination="kDK-dC-ndQ" id="CA5-fI-N41"/>
+                        <outlet property="metricButton" destination="GJ7-JD-4cP" id="vXB-ii-mHt"/>
                         <outlet property="table" destination="ImR-5C-PAK" id="bzr-3k-4ny"/>
                     </connections>
                 </viewController>
@@ -277,6 +278,11 @@
                                                 <action selector="close:" destination="TxL-yy-8XC" id="mSJ-tM-0NR"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="97F-Ui-9ee">
+                                            <connections>
+                                                <action selector="createBlock:" destination="TxL-yy-8XC" id="Fsw-Y1-rze"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -356,9 +362,9 @@
                     </view>
                     <connections>
                         <outlet property="datePicker" destination="7f8-y9-MgL" id="uzc-ta-aLh"/>
-                        <outlet property="distanceAndTime" destination="wD5-NH-MO4" id="ajb-rX-Y0m"/>
                         <outlet property="distanceLabel" destination="1z2-ca-IAd" id="qem-gv-cP9"/>
                         <outlet property="distanceSlider" destination="FNU-zC-3CS" id="zvd-yW-oYq"/>
+                        <outlet property="time" destination="wD5-NH-MO4" id="cPf-0i-tC1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IQX-Uu-BjF" userLabel="First Responder" sceneMemberID="firstResponder"/>
