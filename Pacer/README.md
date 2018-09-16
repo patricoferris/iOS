@@ -1,7 +1,7 @@
-# Pacer - A pace converting iOS App <img align="right" src="./Images.xcassets/AppIcon.appiconset/pacerAppIcon.png" width="36" height="36"/>
+# Pacer - A pace converting and run planning iOS App <img align="right" src="./Images.xcassets/AppIcon.appiconset/pacerAppIcon.png" width="36" height="36"/>
 --------------
-A simple iOS app written in Swift that allows you to easily convert between minute per mile pace and minute per kilometre pace. 
-Just select your measuring system and your minutes and seconds. 
+A simple iOS app written in Swift that allows you to easily convert between minute per mile pace and minute per kilometre pace. It also allows you to plan runs ahead of time including: distance, day, goal time and type. 
+
 
 <div align="center">
   <img src="./app-images/pace_calc.PNG" width="250" height="445">
