@@ -52,8 +52,18 @@ class TrainingBlock {
     }
 }
 
-enum TrainingType {
-    case Hill, Tempo, Steady, Uptempo, Easy, Long
+func getTrainingArray() -> [TrainingType] {
+    return [.Hill, .Tempo, .Steady, .Uptempo, .Easy, .Long]
+}
+
+enum TrainingType : Int {
+    
+    case Hill = 0
+    case Tempo = 1
+    case Steady = 2
+    case Uptempo = 3
+    case Easy = 4
+    case Long = 5
     
     func toString() -> String {
         switch self {

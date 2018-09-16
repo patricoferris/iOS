@@ -65,6 +65,7 @@ class BlockCreator : UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     @IBOutlet weak var distanceSlider: UISlider!
     @IBOutlet weak var time: UIPickerView!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var typePicker: UIPickerView!
     
     let pickerData = [
         Array(0...24),
@@ -72,27 +73,53 @@ class BlockCreator : UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         Array(0...59)
     ]
     
+    let typeData = [getTrainingArray()]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        typePicker.dataSource = self
+        typePicker.delegate = self
         time.dataSource = self
         time.delegate = self
+        distanceLabel.text = String(Double(Int((distanceSlider.value * 10))) / 10.0)
         self.trainingBlock = TrainingBlock(metric: true)
+        self.trainingBlock.setDistance(Double(Int((distanceSlider.value * 10))) / 10.0)
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(pickerData[component][row])
+        if pickerView.tag == 1 {
+            let titleData = (component == 1 || component == 2) && row < 10 ? "0\(String(pickerData[component][row]))" : String(pickerData[component][row])
+            return titleData
+        } else {
+            return typeData[component][row].toString()
+        }
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return pickerData.count
+        if pickerView.tag == 1 {
+            return pickerData.count
+        } else {
+            return typeData.count
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData[component].count
+        if pickerView.tag == 1 {
+            return pickerData[component].count
+        } else {
+            return typeData[component].count
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        setTime()
+        if pickerView.tag == 1 {
+            setTime()
+        } else {
+            guard let trainingType = TrainingType(rawValue: row) else {
+                fatalError("Unknown RecurrenceOption")
+            }
+            trainingBlock.setType(trainingType)
+        }
     }
     
     func setTime() {

@@ -25,7 +25,6 @@ class PlannedRunsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        blocks.append(TrainingBlock(metric: true, distance: 10.0, goalTime: [40.0, 0.0], type: TrainingType.Uptempo, date: Date(timeIntervalSinceNow: 0)))
     }
     
     override func didReceiveMemoryWarning() {
@@ -34,7 +33,7 @@ class PlannedRunsController: UITableViewController {
     
     func addBlock(_ block: TrainingBlock) {
         blocks.append(block)
-        print(blocks)
+        blocks.sort(by: { $0.date < $1.date })
         table.reloadData()
     }
     
@@ -44,9 +43,7 @@ class PlannedRunsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-  
             blocks.remove(at: indexPath.row)
-
             table.reloadData()
         }
     }
