@@ -16,6 +16,7 @@
 		A25A485A214D780F00D7C558 /* PlannedRunController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A4859214D780F00D7C558 /* PlannedRunController.swift */; };
 		A25A485C214D960400D7C558 /* PlannedRunsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25A485B214D960400D7C558 /* PlannedRunsViewController.swift */; };
 		A2EB44C6214E54CA001D9ACB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2EB44C5214E54CA001D9ACB /* Images.xcassets */; };
+		A2EB44C821577B92001D9ACB /* DistanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EB44C721577B92001D9ACB /* DistanceViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		A25A4859214D780F00D7C558 /* PlannedRunController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannedRunController.swift; sourceTree = "<group>"; };
 		A25A485B214D960400D7C558 /* PlannedRunsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannedRunsViewController.swift; sourceTree = "<group>"; };
 		A2EB44C5214E54CA001D9ACB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A2EB44C721577B92001D9ACB /* DistanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				A25A4857214D6B7200D7C558 /* TrainingBlock.swift */,
 				A25A485B214D960400D7C558 /* PlannedRunsViewController.swift */,
 				A25A4859214D780F00D7C558 /* PlannedRunController.swift */,
+				A2EB44C721577B92001D9ACB /* DistanceViewController.swift */,
 			);
 			path = Pacer;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 				A25A4858214D6B7200D7C558 /* TrainingBlock.swift in Sources */,
 				A25A4840214C4EF200D7C558 /* AppDelegate.swift in Sources */,
 				A25A4852214C504200D7C558 /* Utils.swift in Sources */,
+				A2EB44C821577B92001D9ACB /* DistanceViewController.swift in Sources */,
 				A25A485A214D780F00D7C558 /* PlannedRunController.swift in Sources */,
 				A25A485C214D960400D7C558 /* PlannedRunsViewController.swift in Sources */,
 			);

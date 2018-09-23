@@ -19,8 +19,8 @@ class Pace {
         self.metric = metric
     }
     
-    init(distance: Double, minutes: Double, seconds: Double, metric: Bool) {
-        let totalSeconds = seconds + (60 * minutes)
+    init(distance: Double, hours: Double, minutes: Double, seconds: Double, metric: Bool) {
+        let totalSeconds = seconds + (60 * minutes) + (60 * 60 * hours)
         self.metric = metric
         self.seconds = totalSeconds / distance
     }
