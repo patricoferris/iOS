@@ -57,7 +57,7 @@ class PlannedRunsController: UITableViewController {
         cell.dateAndType.text = "\(dateFormatter.string(from: block.date)) : \(block.type.toString())"
         cell.distance.text = block.metric ? "\(block.distance) km" : "\(block.distance) miles"
         
-        let pace = Pace(distance: block.distance, minutes: block.goalTime[0], seconds: block.goalTime[1], metric: block.metric)
+        let pace = Pace(distance: block.distance, hours: 0, minutes: block.goalTime[0], seconds: block.goalTime[1], metric: block.metric)
         let kmSec = pace.getPacePerKm()[1] < 10 ? "0\(pace.getPacePerKm()[1])" : "\(pace.getPacePerKm()[1])"
         let mileSec = pace.getPacePerMile()[1] < 10 ? "0\(pace.getPacePerMile()[1])" : "\(pace.getPacePerMile()[1])"
         
